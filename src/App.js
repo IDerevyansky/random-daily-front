@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
 
+// -----Generetion link start-----
 
   let genLink = (q) => {
 
@@ -49,7 +50,21 @@ function App() {
 
   }
 
- console.log( genLink('link') );
+  // console.log( genLink('link') );
+
+// -----Generetion link end-----
+
+
+
+//----Create name user and tag start-----
+
+let users = 'Stan Pipetkin, Stan Marmazetkin, Michel, David, Georg, Mark';
+let tag = 'Dev, Busines analysis, Sistem analysis, Test, Product Owner';
+
+console.log(users.split(', '));
+
+//----Create name user and tag end-----
+
 
 
   return (
