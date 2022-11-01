@@ -66,6 +66,65 @@ console.log(users.split(', '));
 //----Create name user and tag end-----
 
 
+// -----Sort start-----
+
+let DBUsers = [
+  {
+    "id":"",
+    "name":"",
+    "description":"",
+    "tag":"",
+    "status":"",
+  },
+  {
+    "id":"",
+    "name":"",
+    "description":"",
+    "tag":"",
+    "status":"",
+  },
+  {
+    "id":"",
+    "name":"",
+    "description":"",
+    "tag":"",
+    "status":"",
+  },
+  {
+    "id":"",
+    "name":"",
+    "description":"",
+    "tag":"",
+    "status":"",
+  },
+  {
+    "id":"",
+    "name":"",
+    "description":"",
+    "tag":"",
+    "status":"",
+  }
+];
+
+let config = {
+
+};
+
+  // --1---Sort Random item start--
+
+  // --1---Sort Random item end----
+
+
+  // --2---Sort a->b start----
+  
+  // --2---Sort a->b end------
+
+
+  // --3---Sort Tag start----
+  
+  // --3---Sort Tag end------
+  
+// -----Sort end-----
 
   return (
 
