@@ -58,7 +58,7 @@ function App() {
 
 //----Create name user and tag start-----
 
-let users = 'Stan Pipetkin, Stan Marmazetkin, Michel, David, Georg, Mark';
+let users = 'Stan Pipetkin, Stan Marmazetkin, Michel, David, Georg, Mark, Daniel';
 let tag = 'Dev, Busines analysis, Sistem analysis, Test, Product Owner';
 
 console.log(users.split(', '));
@@ -71,37 +71,51 @@ console.log(users.split(', '));
 let DBUsers = [
   {
     "id":"",
-    "name":"",
+    "name":"Stan Pipetkin",
     "description":"",
-    "tag":"",
+    "tag":"Dev",
     "status":"",
   },
   {
     "id":"",
-    "name":"",
+    "name":"Stan Marmazetkin",
     "description":"",
-    "tag":"",
+    "tag":"Busines analysis",
     "status":"",
   },
   {
     "id":"",
-    "name":"",
+    "name":"Michel",
     "description":"",
-    "tag":"",
+    "tag":"Busines analysis",
+    "status":"Dev",
+  },
+  {
+    "id":"",
+    "name":"David",
+    "description":"",
+    "tag":"Sistem analysis",
     "status":"",
   },
   {
     "id":"",
-    "name":"",
+    "name":"Georg",
     "description":"",
-    "tag":"",
+    "tag":"Test",
     "status":"",
   },
   {
     "id":"",
-    "name":"",
+    "name":"Mark",
     "description":"",
-    "tag":"",
+    "tag":"Product Owner",
+    "status":"",
+  },
+  {
+    "id":"",
+    "name":"Daniel",
+    "description":"",
+    "tag":"no tag",
     "status":"",
   }
 ];
