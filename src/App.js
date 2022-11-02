@@ -1,15 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
 
 // -----Generetion link start-----
 
+  var random = (s) => { return Math.floor(Math.random() * s.length)};
+
   let genLink = (q) => {
 
     let abc = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*?><}{';
-    var random = () => { return Math.floor(Math.random() * abc.length)};
-
+    
     let getRandomInt = (min, max) => {
       min = Math.ceil(min);
       max = Math.floor(max);
@@ -27,7 +29,7 @@ function App() {
       // ---Generation link start---
       case 'link':
         while (i <= getRandomInt(40,80)) {
-          link[i] = abc[random()]
+          link[i] = abc[random(abc)]
           i++
         }
         return link.join('');
@@ -37,7 +39,7 @@ function App() {
       // ---Generation key start---
       case 'key':
         while (i <= getRandomInt(8,28)) {
-          key[i] = abc[random()]
+          key[i] = abc[random(abc)]
           i++
         }
         return key.join('');
@@ -60,8 +62,9 @@ function App() {
 
 let users = 'Stan Pipetkin, Stan Marmazetkin, Michel, David, Georg, Mark, Daniel';
 let tag = 'Dev, Busines analysis, Sistem analysis, Test, Product Owner';
-
-console.log(users.split(', '));
+let userArray = users.split(', ');
+let tagArray = tag.split(', ')
+// console.log(userArray);
 
 //----Create name user and tag end-----
 
@@ -70,61 +73,99 @@ console.log(users.split(', '));
 
 let DBUsers = [
   {
-    "id":"",
+    "id":"345",
     "name":"Stan Pipetkin",
     "description":"",
     "tag":"Dev",
-    "status":"",
+    "status":""
   },
   {
-    "id":"",
+    "id":"567",
     "name":"Stan Marmazetkin",
     "description":"",
     "tag":"Busines analysis",
-    "status":"",
+    "status":""
   },
   {
-    "id":"",
+    "id":"34",
     "name":"Michel",
     "description":"",
     "tag":"Busines analysis",
-    "status":"Dev",
+    "status":"Dev"
   },
   {
-    "id":"",
+    "id":"12",
     "name":"David",
     "description":"",
     "tag":"Sistem analysis",
-    "status":"",
+    "status":""
   },
   {
-    "id":"",
+    "id":"6789",
     "name":"Georg",
     "description":"",
     "tag":"Test",
-    "status":"",
+    "status":"admin"
   },
   {
-    "id":"",
+    "id":"123",
     "name":"Mark",
     "description":"",
-    "tag":"Product Owner",
-    "status":"",
+    "tag":["Product Owner", "Busines analysis"],
+    "status":""
   },
   {
-    "id":"",
+    "id":"7890",
     "name":"Daniel",
     "description":"",
     "tag":"no tag",
-    "status":"",
+    "status":""
   }
 ];
 
 let config = {
-
+  "sort":"random",
 };
 
   // --1---Sort Random item start--
+
+//1. History maybe written in cookie. What would save for reload page. And delete at click button.  
+//2. Duplicate to state react.
+let HistoryUsersForward = DBUsers;
+let HistoryUsersBackward = [];
+let [select, setSelect] = useState("Let's Go...");
+//----
+
+let SortItem = (a) => {
+
+  switch (a) {
+
+    case 'random':
+      
+      let select = HistoryUsersForward.splice(random(DBUsers), 1)[0];
+      HistoryUsersBackward[HistoryUsersBackward.length] = select;
+      
+      setSelect(select.name);
+      console.log(random(DBUsers));
+      // return select;
+
+    break;
+
+    case 'a->b':
+      return 'a->b blya';
+    break;
+
+    case 'tag':
+      return 'tag blya';
+    break;
+  
+    default:
+      break;
+  }
+
+};
+// SortItem(config.sort);
+// console.log( SortItem(config.sort) );
 
   // --1---Sort Random item end----
 
@@ -143,7 +184,8 @@ let config = {
   return (
 
     <>
-      hello
+      <button onClick={()=> SortItem(config.sort)}>click me</button>
+      <div><p>Select to:  {select}</p></div>
     </>
 
   );
