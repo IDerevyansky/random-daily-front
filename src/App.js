@@ -131,10 +131,11 @@ let config = {
 
 //1. History maybe written in cookie. What would save for reload page. And delete at click button.  
 //2. Duplicate to state react.
-let HistoryUsersForward = DBUsers;
-let HistoryUsersBackward = [];
+let [HistoryUsersForward, setHistoryUsersForward] = useState(DBUsers);
 let [select, setSelect] = useState("Let's Go...");
-//----
+let [HistoryUsersBackward, setHistoryUsersBackward] = useState([]);
+
+//----Let's Go...
 
 let SortItem = (a) => {
 
@@ -142,12 +143,25 @@ let SortItem = (a) => {
 
     case 'random':
       
-      let select = HistoryUsersForward.splice(random(DBUsers), 1)[0];
-      HistoryUsersBackward[HistoryUsersBackward.length] = select;
+      // let select = HistoryUsersForward.splice(random(DBUsers), 1)[0];
+      // HistoryUsersBackward[HistoryUsersBackward.length] = select;
+
+      if(HistoryUsersForward.length != 0){
+
+        setSelect(HistoryUsersBackward[HistoryUsersBackward.length] = HistoryUsersForward.splice(random(HistoryUsersForward), 1)[0]); 
+        
+
+        // console.log(HistoryUsersForward);
+        // console.log(select);
+        // console.log(HistoryUsersBackward);
+        return select;
+
+      }else{
+        console.log('Array HistoryUsersForward empty!');
+        setSelect('Done');
+      }
+
       
-      setSelect(select.name);
-      console.log(random(DBUsers));
-      // return select;
 
     break;
 
@@ -185,7 +199,7 @@ let SortItem = (a) => {
 
     <>
       <button onClick={()=> SortItem(config.sort)}>click me</button>
-      <div><p>Select to:  {select}</p></div>
+      <div><p>Select to: { select.name == undefined?select:select.name }</p></div>
     </>
 
   );
