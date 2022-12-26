@@ -60,8 +60,11 @@ function App() {
 
 //----Create name user and tag start-----
 
+////----Get user name or tag with front start-----
 let users = 'Stan Pipetkin, Stan Marmazetkin, Michel, David, Georg, Mark, Daniel';
 let tag = 'Dev, Busines analysis, Sistem analysis, Test, Product Owner';
+////----Get user name or tag with front end-------
+
 let userArray = users.split(', ');
 let tagArray = tag.split(', ')
 // console.log(userArray);
@@ -74,24 +77,24 @@ let tagArray = tag.split(', ')
 let DBUsers = [
   {
     "id":"345",
-    "name":"Stan Pipetkin",
+    "name":"Atan Pipetkin",
     "description":"",
     "tag":"Dev",
     "status":""
   },
   {
     "id":"567",
-    "name":"Stan Marmazetkin",
+    "name":"Ctan Marmazetkin",
     "description":"",
     "tag":"Busines analysis",
     "status":""
   },
   {
     "id":"34",
-    "name":"Michel",
+    "name":"Bichel",
     "description":"",
     "tag":"Busines analysis",
-    "status":"Dev"
+    "status":""
   },
   {
     "id":"12",
@@ -102,21 +105,21 @@ let DBUsers = [
   },
   {
     "id":"6789",
-    "name":"Georg",
+    "name":"Ganiel",
     "description":"",
     "tag":"Test",
     "status":"admin"
   },
   {
     "id":"123",
-    "name":"Mark",
+    "name":"Eark",
     "description":"",
     "tag":["Product Owner", "Busines analysis"],
     "status":""
   },
   {
     "id":"7890",
-    "name":"Daniel",
+    "name":"Feorg",
     "description":"",
     "tag":"no tag",
     "status":""
@@ -124,7 +127,7 @@ let DBUsers = [
 ];
 
 let config = {
-  "sort":"random",
+  "sort":"a->b",
 };
 
   // --1---Sort Random item start--
@@ -134,6 +137,12 @@ let config = {
 let [HistoryUsersForward, setHistoryUsersForward] = useState(DBUsers);
 let [select, setSelect] = useState("Let's Go...");
 let [HistoryUsersBackward, setHistoryUsersBackward] = useState([]);
+
+let recordHistory = (a) => {
+
+  setSelect(HistoryUsersBackward[HistoryUsersBackward.length] = HistoryUsersForward.splice(a, 1)[0]); 
+
+}
 
 //----Let's Go...
 
@@ -148,8 +157,8 @@ let SortItem = (a) => {
 
       if(HistoryUsersForward.length != 0){
 
-        setSelect(HistoryUsersBackward[HistoryUsersBackward.length] = HistoryUsersForward.splice(random(HistoryUsersForward), 1)[0]); 
-        
+        // setSelect(HistoryUsersBackward[HistoryUsersBackward.length] = HistoryUsersForward.splice(random(HistoryUsersForward), 1)[0]); 
+        recordHistory(random(HistoryUsersForward));
 
         // console.log(HistoryUsersForward);
         // console.log(select);
@@ -161,12 +170,22 @@ let SortItem = (a) => {
         setSelect('Done');
       }
 
-      
-
     break;
 
     case 'a->b':
-      return 'a->b blya';
+//------Done this-----///
+      let sortName = [];
+
+      for (let i = 0; i < HistoryUsersForward.length; i++) {
+       
+        sortName[i] = HistoryUsersForward[i].name;
+        console.log( sortName.sort() );
+
+      }
+      // recordHistory( --new method-- );
+
+      return;
+      
     break;
 
     case 'tag':
