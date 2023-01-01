@@ -179,9 +179,11 @@ let SortItem = (a) => {
       for (let i = 0; i < HistoryUsersForward.length; i++) {
        
         sortName[i] = HistoryUsersForward[i].name;
-        console.log( sortName.sort() );
+       
 
       }
+      
+      console.log( sortName.sort() );
       // recordHistory( --new method-- );
 
       return;
