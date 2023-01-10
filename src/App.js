@@ -2,9 +2,33 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
+  // Get to front side data
+  // And send to DataBase
+  // 1.Default request with sort database a->b
+  // 2.After sort at front-side at tag or random method
+  // Сделать запись данных в куку что бы избежать потери очереди
+  // при перезагрузке страницы. Удалять данные либо по времени либо по действию.
+  // Make record data in cookie that lose queue at reload page. 
+  // Delete data by time elso action 
+
+  //----Create name user and tag start-----
+
+    ////----Get user name or tag with front start-----
+    let users = 'Stan Pipetkin, Stan Marmazetkin, Michel, David, Georg, Mark, Daniel';
+    let tag = 'Dev, Busines analysis, Sistem analysis, Test, Product Owner';
+    ////----Get user name or tag with front end-------
+
+    let userArray = users.split(', ');
+    let tagArray = tag.split(', ')
+    // console.log(userArray);
+
+
+//----Create name user and tag end-----
+
+
 function App() {
 
-// -----Generetion link start-----
+// -----function Random generetion start-----
 
   var random = (s) => { return Math.floor(Math.random() * s.length)};
 
@@ -54,22 +78,7 @@ function App() {
 
   // console.log( genLink('link') );
 
-// -----Generetion link end-----
-
-
-
-//----Create name user and tag start-----
-
-////----Get user name or tag with front start-----
-let users = 'Stan Pipetkin, Stan Marmazetkin, Michel, David, Georg, Mark, Daniel';
-let tag = 'Dev, Busines analysis, Sistem analysis, Test, Product Owner';
-////----Get user name or tag with front end-------
-
-let userArray = users.split(', ');
-let tagArray = tag.split(', ')
-// console.log(userArray);
-
-//----Create name user and tag end-----
+// -----function Random generetion end-----
 
 
 // -----Sort start-----
@@ -77,49 +86,49 @@ let tagArray = tag.split(', ')
 let DBUsers = [
   {
     "id":"345",
-    "name":"Atan Pipetkin",
+    "name":"Atan Pipetkin1",
     "description":"",
     "tag":"Dev",
     "status":""
   },
   {
     "id":"567",
-    "name":"Ctan Marmazetkin",
+    "name":"Btan Marmazetkin2",
     "description":"",
     "tag":"Busines analysis",
     "status":""
   },
   {
     "id":"34",
-    "name":"Bichel",
+    "name":"Cichel3",
     "description":"",
     "tag":"Busines analysis",
     "status":""
   },
   {
     "id":"12",
-    "name":"David",
+    "name":"David4",
     "description":"",
     "tag":"Sistem analysis",
     "status":""
   },
   {
     "id":"6789",
-    "name":"Ganiel",
+    "name":"Eaniel5",
     "description":"",
     "tag":"Test",
     "status":"admin"
   },
   {
     "id":"123",
-    "name":"Eark",
+    "name":"Fark6",
     "description":"",
     "tag":["Product Owner", "Busines analysis"],
     "status":""
   },
   {
     "id":"7890",
-    "name":"Feorg",
+    "name":"Georg7",
     "description":"",
     "tag":"no tag",
     "status":""
@@ -127,13 +136,14 @@ let DBUsers = [
 ];
 
 let config = {
-  "sort":"a->b",
+  "sort":"random",
 };
 
   // --1---Sort Random item start--
 
 //1. History maybe written in cookie. What would save for reload page. And delete at click button.  
 //2. Duplicate to state react.
+
 let [HistoryUsersForward, setHistoryUsersForward] = useState(DBUsers);
 let [select, setSelect] = useState("Let's Go...");
 let [HistoryUsersBackward, setHistoryUsersBackward] = useState([]);
@@ -148,55 +158,47 @@ let recordHistory = (a) => {
 
 let SortItem = (a) => {
 
-  switch (a) {
+  if(HistoryUsersForward.length != 0){
 
-    case 'random':
+      switch (a) {
+
+        case 'random':
+          
+        
+            recordHistory(random(HistoryUsersForward));
+
+            // console.log(HistoryUsersForward);
+            // console.log(select);
+            // console.log(HistoryUsersBackward);
+            return select;
+
+
+        break;
+        
+        case 'a->b':
+          
+
+            let i = 0;
+            recordHistory(i);
+            i++;
+
+            return select;
+          
+
+        break;
+
+        case 'tag':
+          return 'tag blya';
+        break;
       
-      // let select = HistoryUsersForward.splice(random(DBUsers), 1)[0];
-      // HistoryUsersBackward[HistoryUsersBackward.length] = select;
-
-      if(HistoryUsersForward.length != 0){
-
-        // setSelect(HistoryUsersBackward[HistoryUsersBackward.length] = HistoryUsersForward.splice(random(HistoryUsersForward), 1)[0]); 
-        recordHistory(random(HistoryUsersForward));
-
-        // console.log(HistoryUsersForward);
-        // console.log(select);
-        // console.log(HistoryUsersBackward);
-        return select;
-
-      }else{
-        console.log('Array HistoryUsersForward empty!');
-        setSelect('Done');
+        default:
+          break;
       }
 
-    break;
-
-    case 'a->b':
-//------Done this-----///
-      let sortName = [];
-
-      for (let i = 0; i < HistoryUsersForward.length; i++) {
-       
-        sortName[i] = HistoryUsersForward[i].name;
-       
-
-      }
-      
-      console.log( sortName.sort() );
-      // recordHistory( --new method-- );
-
-      return;
-      
-    break;
-
-    case 'tag':
-      return 'tag blya';
-    break;
-  
-    default:
-      break;
-  }
+}else{
+  console.log('Array HistoryUsersForward empty!');
+  setSelect('Done');
+}
 
 };
 // SortItem(config.sort);
@@ -206,6 +208,10 @@ let SortItem = (a) => {
 
 
   // --2---Sort a->b start----
+
+    console.log(HistoryUsersForward);
+    console.log(select);
+    console.log(HistoryUsersBackward);
   
   // --2---Sort a->b end------
 
