@@ -130,7 +130,7 @@ let DBUsers = [
     "id":"7890",
     "name":"Georg7",
     "description":"",
-    "tag":"no tag",
+    "tag":"",
     "status":""
   }
 ];
@@ -139,7 +139,7 @@ let config = {
   "sort":"random",
 };
 
-  // --1---Sort Random item start--
+//В config возможно добавить параметр select{name or tag} и sort{random or a->b}
 
 //1. History maybe written in cookie. What would save for reload page. And delete at click button.  
 //2. Duplicate to state react.
@@ -154,7 +154,7 @@ let recordHistory = (a) => {
 
 }
 
-//----Let's Go...
+
 
 let SortItem = (a) => {
 
@@ -163,32 +163,37 @@ let SortItem = (a) => {
       switch (a) {
 
         case 'random':
-          
-        
+
             recordHistory(random(HistoryUsersForward));
-
-            // console.log(HistoryUsersForward);
-            // console.log(select);
-            // console.log(HistoryUsersBackward);
-            return select;
-
+            //Тут надо потом все значения записть в куку
 
         break;
         
         case 'a->b':
           
-
-            let i = 0;
-            recordHistory(i);
-            i++;
-
-            return select;
-          
+            recordHistory(0);
+            //Тут надо потом все значения записть в куку
 
         break;
 
         case 'tag':
-          return 'tag blya';
+
+              // ---->надо доработать конфиг
+
+              // 1.Проверяем наличие тега
+              // 2.Проверяем строка это или массив
+              //   * Если строка то сравниваем с списком порядка выступления.
+              //   * Если массив то входим в массив и проверяем содержимое сравниваем с списком порядка выступления.
+              // -------
+              // Сперва выдается список по алфавиту
+
+          let list = ['Sistem analysis', 'Busines analysis', 'Dev', 'Test', 'Product Owner'];
+
+          
+          // ---->закончил тут
+          
+          
+
         break;
       
         default:
@@ -201,17 +206,18 @@ let SortItem = (a) => {
 }
 
 };
-// SortItem(config.sort);
-// console.log( SortItem(config.sort) );
 
-  // --1---Sort Random item end----
+
+  // --1---Sort random start----
+
+  // --1---Sort random start----
 
 
   // --2---Sort a->b start----
 
-    console.log(HistoryUsersForward);
-    console.log(select);
-    console.log(HistoryUsersBackward);
+    // console.log(HistoryUsersForward);
+    // console.log(select);
+    // console.log(HistoryUsersBackward);
   
   // --2---Sort a->b end------
 
@@ -226,7 +232,10 @@ let SortItem = (a) => {
 
     <>
       <button onClick={()=> SortItem(config.sort)}>click me</button>
-      <div><p>Select to: { select.name == undefined?select:select.name }</p></div>
+      <div>
+        <p>Select to: { select.name == undefined?select:select.name }</p>
+        <p>Tag to: { select.tag == ""?'Without tag':select.tag }</p>
+      </div>
     </>
 
   );
