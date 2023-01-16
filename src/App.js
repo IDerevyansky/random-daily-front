@@ -2,37 +2,26 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
-  // Get to front side data
-  // And send to DataBase
-  // 1.Default request with sort database a->b
-  // 2.After sort at front-side at tag or random method
-  // Сделать запись данных в куку что бы избежать потери очереди
-  // при перезагрузке страницы. Удалять данные либо по времени либо по действию.
-  // Make record data in cookie that lose queue at reload page. 
-  // Delete data by time elso action 
 
-  //----Create name user and tag start-----
+function App() {
 
-    ////----Get user name or tag with front start-----
-    let users = 'Stan Pipetkin, Stan Marmazetkin, Michel, David, Georg, Mark, Daniel';
-    let tag = 'Dev, Busines analysis, Sistem analysis, Test, Product Owner';
-    ////----Get user name or tag with front end-------
+//----Create name user and tag start-----
 
-    let userArray = users.split(', ');
-    let tagArray = tag.split(', ')
-    // console.log(userArray);
+    let splitItem = (q) => {
+      return q.split(', ');
+    }     
 
+    // console.log( splitItem('Stan Pipetkin, Stan Marmazetkin, Michel, David, Georg, Mark, Daniel') );
 
 //----Create name user and tag end-----
 
 
-function App() {
 
-// -----function Random generetion start-----
-
-  var random = (s) => { return Math.floor(Math.random() * s.length)};
-
+// -----function Random generetion start----
+  
   let genLink = (q) => {
+
+    let random = (s) => { return Math.floor(Math.random() * s.length)};
 
     let abc = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*?><}{';
     
@@ -85,156 +74,165 @@ function App() {
 
 let DBUsers = [
   {
-    "id":"345",
-    "name":"Atan Pipetkin1",
+    "id":"111",
+    "name":"Yasin Ermengard",
     "description":"",
     "tag":"Dev",
     "status":""
   },
   {
-    "id":"567",
-    "name":"Btan Marmazetkin2",
+    "id":"112",
+    "name":"Geetha Zhanna",
+    "description":"",
+    "tag":"Dev",
+    "status":""
+  },
+  {
+    "id":"113",
+    "name":"Mariana Marjolein",
+    "description":"",
+    "tag":"Dev",
+    "status":""
+  },
+  {
+    "id":"211",
+    "name":"Prissy Vilma",
     "description":"",
     "tag":"Busines analysis",
     "status":""
   },
   {
-    "id":"34",
-    "name":"Cichel3",
+    "id":"212",
+    "name":"Beatrix Hayley",
     "description":"",
     "tag":"Busines analysis",
     "status":""
   },
   {
-    "id":"12",
-    "name":"David4",
-    "description":"",
-    "tag":"Sistem analysis",
-    "status":""
-  },
-  {
-    "id":"6789",
-    "name":"Eaniel5",
-    "description":"",
-    "tag":"Test",
-    "status":"admin"
-  },
-  {
-    "id":"123",
-    "name":"Fark6",
+    "id":"213",
+    "name":"Berendina Eero",
     "description":"",
     "tag":["Product Owner", "Busines analysis"],
     "status":""
   },
   {
-    "id":"7890",
-    "name":"Georg7",
+    "id":"301",
+    "name":"Heremoana Léonel",
+    "description":"",
+    "tag":"Sistem analysis",
+    "status":""
+  },
+  {
+    "id":"302",
+    "name":"Tryggvi Thomas",
+    "description":"",
+    "tag":"Sistem analysis",
+    "status":""
+  },{
+    "id":"303",
+    "name":"Ana María Wotan",
+    "description":"",
+    "tag":"Sistem analysis",
+    "status":""
+  },
+  {
+    "id":"401",
+    "name":"Javed Samir",
+    "description":"",
+    "tag":"Test",
+    "status":"admin"
+  },
+  {
+    "id":"402",
+    "name":"Amihan Zayn ad-Din",
+    "description":"",
+    "tag":["Test", "Dev"],
+    "status":"admin"
+  },
+  {
+    "id":"403",
+    "name":"Nagendra Bláithín",
+    "description":"",
+    "tag":"Test",
+    "status":"admin"
+  },
+  {
+    "id":"501",
+    "name":"Gruffydd Siorus",
+    "description":"",
+    "tag":["Product Owner", "Busines analysis"],
+    "status":""
+  },
+  {
+    "id":"601",
+    "name":"Konjit Edmonda",
     "description":"",
     "tag":"",
     "status":""
   }
 ];
 
+let listTag = splitItem("Sistem analysis, Busines analysis, Dev, Test, Product Owner");
+
+
 let config = {
-  "sort":"random",
+  "select":"name", //select{name or tag}
+  "sort":"a->b" //sort{random or a->b}
 };
 
-//В config возможно добавить параметр select{name or tag} и sort{random or a->b}
 
-//1. History maybe written in cookie. What would save for reload page. And delete at click button.  
-//2. Duplicate to state react.
+let [Users, setUsers] = useState(DBUsers.sort( (a, b)=> a.name > b.name? 1 : -1 ));
+let [Select, setSelect] = useState("Let's Go...");
+let [History, setHistory] = useState([]);
+let [ListTags, setListTags] = useState(listTag);
+let [Index, setIndex] = useState(0);
 
-let [HistoryUsersForward, setHistoryUsersForward] = useState(DBUsers);
-let [select, setSelect] = useState("Let's Go...");
-let [HistoryUsersBackward, setHistoryUsersBackward] = useState([]);
-
-let recordHistory = (a) => {
-
-  setSelect(HistoryUsersBackward[HistoryUsersBackward.length] = HistoryUsersForward.splice(a, 1)[0]); 
-
+let rec = (q) => {
+  setSelect( History[History.length] = Users.splice(q, 1)[0] );
 }
 
+let SortItem = () => {
 
+  if(Users != 0){
+//---
 
-let SortItem = (a) => {
+if(config.select == 'name'){
 
-  if(HistoryUsersForward.length != 0){
-
-      switch (a) {
-
-        case 'random':
-
-            recordHistory(random(HistoryUsersForward));
-            //Тут надо потом все значения записть в куку
-
-        break;
-        
-        case 'a->b':
-          
-            recordHistory(0);
-            //Тут надо потом все значения записть в куку
-
-        break;
-
-        case 'tag':
-
-              // ---->надо доработать конфиг
-
-              // 1.Проверяем наличие тега
-              // 2.Проверяем строка это или массив
-              //   * Если строка то сравниваем с списком порядка выступления.
-              //   * Если массив то входим в массив и проверяем содержимое сравниваем с списком порядка выступления.
-              // -------
-              // Сперва выдается список по алфавиту
-
-          let list = ['Sistem analysis', 'Busines analysis', 'Dev', 'Test', 'Product Owner'];
-
-          
-          // ---->закончил тут
-          
-          
-
-        break;
-      
-        default:
-          break;
-      }
+  if(config.sort == 'random'){
+    //Random
+    rec( Math.floor(Math.random() * Users.length) );
+  }else{
+    //a->b
+    rec(0);
+  }
 
 }else{
-  console.log('Array HistoryUsersForward empty!');
-  setSelect('Done');
+
 }
 
-};
+//---
+  }else{
+    setSelect('Done...');
+  }
 
-
-  // --1---Sort random start----
-
-  // --1---Sort random start----
-
-
-  // --2---Sort a->b start----
-
-    // console.log(HistoryUsersForward);
-    // console.log(select);
-    // console.log(HistoryUsersBackward);
   
-  // --2---Sort a->b end------
 
 
-  // --3---Sort Tag start----
-  
-  // --3---Sort Tag end------
-  
-// -----Sort end-----
+}
+
+
+
 
   return (
 
     <>
-      <button onClick={()=> SortItem(config.sort)}>click me</button>
+      <button onClick={()=>SortItem()}>Backward</button>
+      <button onClick={()=>SortItem()}>Next</button>
+      <button onClick={()=>SortItem()}>Forward</button>
+
       <div>
-        <p>Select to: { select.name == undefined?select:select.name }</p>
-        <p>Tag to: { select.tag == ""?'Without tag':select.tag }</p>
+        <p>Select to: { Select.name == undefined?Select:Select.name }</p>
+        <p>Tag to: { Select.tag == ""?'Without tag':Select.tag }</p>
       </div>
     </>
 
