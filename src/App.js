@@ -182,23 +182,26 @@ let config = {
 
 
 let [Users, setUsers] = useState(DBUsers.sort( (a, b)=> a.name > b.name? 1 : -1 ));
-let [Select, setSelect] = useState("Let's Go...");
+let [Select, setSelect] = useState( {"name":"Let's Go..."} );
 let [History, setHistory] = useState([]);
 let [ListTags, setListTags] = useState(listTag);
 let [Index, setIndex] = useState(0);
+
+
 
 let rec = (q) => {
   setSelect( History[History.length] = Users.splice(q, 1)[0] );
 }
 
+
 let SortItem = () => {
 
-  if(Users != 0){
+
+  if(Users.length !== 0){
 //---
+if(config.select === 'name'){
 
-if(config.select == 'name'){
-
-  if(config.sort == 'random'){
+  if(config.sort === 'random'){
     //Random
     rec( Math.floor(Math.random() * Users.length) );
   }else{
@@ -212,10 +215,8 @@ if(config.select == 'name'){
 
 //---
   }else{
-    setSelect('Done...');
+    setSelect( {"name":"Done..."} );
   }
-
-  
 
 
 }
@@ -231,13 +232,12 @@ if(config.select == 'name'){
       <button onClick={()=>SortItem()}>Forward</button>
 
       <div>
-        <p>Select to: { Select.name == undefined?Select:Select.name }</p>
-        <p>Tag to: { Select.tag == ""?'Without tag':Select.tag }</p>
+        <p>Select to: { Select.name }</p>
+        <p>{ Select.tag !== undefined ?'Tag to: '+ Select.tag:'' }</p>
       </div>
     </>
 
   );
-
 
 
 }
